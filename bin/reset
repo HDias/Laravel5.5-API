@@ -1,0 +1,7 @@
+php artisan config:cache
+php artisan config:clear
+composer dumpautoload
+php artisan migrate:reset
+php artisan migrate --seed
+php artisan cache:forget lang.js
+php artisan louzada:create:permission --force
