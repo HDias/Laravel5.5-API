@@ -1,9 +1,11 @@
 <?php
 
-Route::post('register', 'AuthController@register');
-Route::post('login', 'AuthController@login');
-Route::post('recover', 'AuthController@recover');
+Route::post('register', 'API\AuthController@register');
+Route::post('login', 'API\AuthController@login');
+Route::post('recover', 'API\AuthController@recover');
 
 Route::group(['middleware' => ['jwt.auth']], function() {
-    Route::get('logout', 'AuthController@logout');
+    Route::get('logout', 'API\AuthController@logout');
+
+    Route::get('dashboard', 'API\DashboardController@index');
 });

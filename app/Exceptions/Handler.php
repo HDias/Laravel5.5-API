@@ -49,11 +49,32 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        // Verifica a Exception do Form Request para retornar JSOn
-        if ($exception instanceof \Illuminate\Validation\ValidationException) { 
-            return new JsonResponse($exception->errors(), 422); 
+        if (! config('app.debug')) {
+            // Verifica a Exception do Form Request para retornar JSOn
+            if ($exception instanceof \Illuminate\Validation\ValidationException) { 
+                return new JsonResponse($exception->errors(), 422); 
+            }
+
+            $this->jwtException($exception);
+
+            return response()->json(['error' => $exception->getMessage()]);
         }
 
         return parent::render($request, $exception);
+    }
+
+    /**
+     * [jwtException description]
+     * @return [type] [description]
+     */
+    private function jwtException($exception)
+    {
+        if ($exception instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException) {
+            return response()->json(['error' => trans('jwt.token_invalid')]);
+        }
+
+        if ($exception instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException) {
+            return response()->json(['error' => trans('jwt.token_expired')]);
+        }
     }
 }

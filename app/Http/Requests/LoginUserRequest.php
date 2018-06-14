@@ -2,6 +2,8 @@
 
 namespace Sendler\Http\Requests;
 
+use Illuminate\Foundation\Http\FormRequest;
+
 class LoginUserRequest extends FormRequest
 {
     /**
@@ -22,7 +24,7 @@ class LoginUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'email'     => 'required|max:255',
+            'email'     => 'required|email|max:255',
             'password'  => 'required|min:6|max:255',
         ];
     }
