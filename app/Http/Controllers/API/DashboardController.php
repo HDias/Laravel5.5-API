@@ -9,6 +9,6 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return 'logado';
+        return response()->json('Dashboard', 200);
     }
 }

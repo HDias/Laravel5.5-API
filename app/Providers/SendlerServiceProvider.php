@@ -3,7 +3,7 @@
 namespace Sendler\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\User;
+use Sendler\User;
 
 class SendlerServiceProvider extends ServiceProvider
 {

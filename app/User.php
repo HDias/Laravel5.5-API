@@ -34,7 +34,7 @@ class User extends Authenticatable implements AuditableContract, UserResolver, J
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token'
     ];
 
 
@@ -89,5 +89,11 @@ class User extends Authenticatable implements AuditableContract, UserResolver, J
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function userLogged($cpf)
+    {
+        return $this->select('id', 'cpf', 'name')
+            ->where('cpf', $cpf);
     }
 }
