@@ -15,7 +15,7 @@ class AuthController extends Controller
     public function login(LoginUserRequest $request)
     {
         // try {
-        if (!$token = JWTAuth::attempt($request->only('cpf', 'password'))) {
+        if (!$token = JWTAuth::attempt($request->only('username', 'password'))) {
             $message = trans('jwt.invalid_login');
             throw new \Sendler\Exceptions\SendlerException($message, 422);
         }
@@ -23,7 +23,7 @@ class AuthController extends Controller
         return response()->json([
             'result' => [
                 'token' => $token,
-                'user'=>  app('model.user')->userLogged($request->cpf)->first()
+                'user'=>  app('model.user')->userLogged($request->username)->first()
             ]
         ]);
 

@@ -91,9 +91,9 @@ class User extends Authenticatable implements AuditableContract, UserResolver, J
         return [];
     }
 
-    public function userLogged($cpf)
+    public function userLogged($username)
     {
-        return $this->select('id', 'cpf', 'name')
-            ->where('cpf', $cpf);
+        return $this->select('id', 'username', 'name')
+            ->where('username', $username);
     }
 }
