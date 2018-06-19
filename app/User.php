@@ -25,7 +25,7 @@ class User extends Authenticatable implements AuditableContract, UserResolver, J
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'email', 'password',
     ];
 
     /**
@@ -93,7 +93,7 @@ class User extends Authenticatable implements AuditableContract, UserResolver, J
 
     public function userLogged($username)
     {
-        return $this->select('id', 'username', 'name')
+        return $this->select('id', 'username')
             ->where('username', $username);
     }
 }

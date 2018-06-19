@@ -49,6 +49,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        dd($exception);
         if (! config('app.debug')) {
             // Verifica a Exception do Form Request para retornar JSOn
             if ($exception instanceof \Illuminate\Validation\ValidationException) { 
