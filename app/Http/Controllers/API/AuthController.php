@@ -22,7 +22,7 @@ class AuthController extends Controller
         return response()->json([
             'mensagem' => trans('jwt.login_success'),
             'objetos' => [
-                'user' => app('model.user')->userLogged($request->username)->first()
+                'user' => app('model.user')->userLogged($request->email)->first()
             ],
             'token' => $token
         ]);       
