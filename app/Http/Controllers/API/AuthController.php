@@ -14,21 +14,17 @@ class AuthController extends Controller
 {
     public function login(LoginUserRequest $request)
     {
-        // try {
         if (!$token = JWTAuth::attempt($request->only('username', 'password'))) {
             $message = trans('jwt.invalid_login');
-            throw new \Sendler\Exceptions\SendlerException($message, 422);
+            throw new \Sendler\Exceptions\SendlerException($message, 401);
         }
 
         return response()->json([
-            'result' => [
-                'token' => $token,
-                'user'=>  app('model.user')->userLogged($request->username)->first()
-            ]
-        ]);
-
-        // } catch (JWTAuthException $exception) {
-        //     throw new \Exception(trans('token_create_fail'), 422);
-        // }        
+            'mensagem' => trans('jwt.login_success'),
+            'objetos' => [
+                'user' => app('model.user')->userLogged($request->username)->first()
+            ],
+            'token' => $token
+        ]);       
     }
 }

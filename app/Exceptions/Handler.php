@@ -50,19 +50,25 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         if (! config('app.debug')) {
-            // Exception do Sistema Sendler
-            if ($exception instanceof \Sendler\Exceptions\SendlerException) { 
-                return new JsonResponse(['errors' => $exception->getMessage()], $exception->getStatusCode()); 
-            }
-
             // Verifica a Exception do Form Request para retornar JSOn
             if ($exception instanceof \Illuminate\Validation\ValidationException) { 
-                return new JsonResponse(['errors' => $exception->errors()], 422); 
+                return new JsonResponse([
+                    'errors' => $exception->errors()
+                ], 422); 
             }
 
             $this->jwtException($exception);
 
-            return new JsonResponse(['error' => 'Erro no Sistema! Procure o Administrador.'], 500);
+            // Exception do Sistema Sendler
+            if ($exception instanceof \Sendler\Exceptions\SendlerException) { 
+                return new JsonResponse([
+                    'mensagem' => $exception->getMessage()
+                ], $exception->getStatusCode()); 
+            }
+
+            return new JsonResponse([
+                'mensagem' => 'Erro no Sistema! Procure o Administrador.'
+            ], 500);
         }
 
         return parent::render($request, $exception);
