@@ -1,6 +1,6 @@
 <?php
 
-namespace Sendler\Providers;
+namespace API\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -14,7 +14,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = 'Sendler\Http\Controllers';
+    protected $namespace = 'API\Http\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.

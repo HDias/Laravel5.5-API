@@ -1,6 +1,6 @@
 <?php
 
-namespace Sendler\Http;
+namespace API\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -17,9 +17,9 @@ class Kernel extends HttpKernel
         \Spatie\Cors\Cors::class,
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
-        \Sendler\Http\Middleware\TrimStrings::class,
+        \API\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        \Sendler\Http\Middleware\TrustProxies::class
+        \API\Http\Middleware\TrustProxies::class
     ];
 
     /**
@@ -29,12 +29,12 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
-            \Sendler\Http\Middleware\EncryptCookies::class,
+            \API\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             // \Illuminate\Session\Middleware\AuthenticateSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \Sendler\Http\Middleware\VerifyCsrfToken::class,
+            \API\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
@@ -56,7 +56,7 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
-        'guest' => \Sendler\Http\Middleware\RedirectIfAuthenticated::class,
+        'guest' => \API\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'jwt.auth' => \Tymon\JWTAuth\Middleware\GetUserFromToken::class,
         'jwt.refresh' => \Tymon\JWTAuth\Middleware\RefreshToken::class,

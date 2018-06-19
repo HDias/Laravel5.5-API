@@ -34,17 +34,15 @@ $production = [
     /*
      * Application Service Providers...
      */
-    Sendler\Providers\SendlerServiceProvider::class,
-    Sendler\Providers\AuthServiceProvider::class,
-    // Sendler\Providers\BroadcastServiceProvider::class,
-    Sendler\Providers\EventServiceProvider::class,
-    Sendler\Providers\RouteServiceProvider::class,
+    API\Providers\APIServiceProvider::class,
+    API\Providers\AuthServiceProvider::class,
+    // API\Providers\BroadcastServiceProvider::class,
+    API\Providers\EventServiceProvider::class,
+    API\Providers\RouteServiceProvider::class,
 
     /*
      * Package Service Providers...
      */
-    Artesaos\Defender\Providers\DefenderServiceProvider::class,
-
     OwenIt\Auditing\AuditingServiceProvider::class,
 
     /**

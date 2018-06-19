@@ -1,6 +1,6 @@
 <?php
 
-namespace Sendler\Exceptions;
+namespace API\Exceptions;
 
 interface ExceptionInterface
 {

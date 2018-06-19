@@ -1,6 +1,6 @@
 <?php
 
-namespace Sendler\Providers;
+namespace API\Providers;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -13,8 +13,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'Sendler\Events\Event' => [
-            'Sendler\Listeners\EventListener',
+        'API\Events\Event' => [
+            'API\Listeners\EventListener',
         ],
     ];
 

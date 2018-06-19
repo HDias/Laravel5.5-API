@@ -14,6 +14,6 @@ class UsersTableSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        factory(Sendler\User::class)->create();
+        factory(API\User::class)->create();
     }
 }

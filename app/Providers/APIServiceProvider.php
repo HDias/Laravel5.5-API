@@ -1,11 +1,11 @@
 <?php
 
-namespace Sendler\Providers;
+namespace API\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Sendler\User;
+use API\User;
 
-class SendlerServiceProvider extends ServiceProvider
+class APIServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.

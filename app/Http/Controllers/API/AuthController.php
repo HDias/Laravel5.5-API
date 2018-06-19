@@ -1,22 +1,22 @@
 <?php
 
-namespace Sendler\Http\Controllers\API;
+namespace API\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\User;
 use JWTAuthException;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
-use Sendler\Http\Requests\LoginUserRequest;
-use Sendler\Http\Controllers\Controller;
+use API\Http\Requests\LoginUserRequest;
+use API\Http\Controllers\Controller;
 
 class AuthController extends Controller
 {
     public function login(LoginUserRequest $request)
     {
-        if (!$token = JWTAuth::attempt($request->only('username', 'password'))) {
+        if (!$token = JWTAuth::attempt($request->only('email', 'password'))) {
             $message = trans('jwt.invalid_login');
-            throw new \Sendler\Exceptions\SendlerException($message, 401);
+            throw new \API\Exceptions\APIException($message, 401);
         }
 
         return response()->json([

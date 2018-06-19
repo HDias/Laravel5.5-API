@@ -3,7 +3,7 @@
 namespace GeDuc;
 
 use Askedio\SoftCascade\Traits\SoftCascadeTrait;
-use Sendler\Scope\SoftDeleting;
+use API\Scope\SoftDeleting;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Auditable;
 use Illuminate\Database\Eloquent\SoftDeletes;

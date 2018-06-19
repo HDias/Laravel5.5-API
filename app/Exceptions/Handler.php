@@ -1,6 +1,6 @@
 <?php
 
-namespace Sendler\Exceptions;
+namespace API\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -49,23 +49,24 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        dd($exception);
         if (! config('app.debug')) {
             // Verifica a Exception do Form Request para retornar JSOn
-            if ($exception instanceof \Illuminate\Validation\ValidationException) { 
+            if ($exception instanceof \Illuminate\Validation\ValidationException) {
+
                 return new JsonResponse([
                     'errors' => $exception->errors()
-                ], 422); 
+                ], 422);
             }
 
             $this->jwtException($exception);
 
             // Exception do Sistema Sendler
-            if ($exception instanceof \Sendler\Exceptions\SendlerException) { 
+            if ($exception instanceof \API\Exceptions\APIException) {
                 return new JsonResponse([
                     'mensagem' => $exception->getMessage()
-                ], $exception->getStatusCode()); 
+                ], $exception->getStatusCode());
             }
-
             return new JsonResponse([
                 'mensagem' => 'Erro no Sistema! Procure o Administrador.'
             ], 500);

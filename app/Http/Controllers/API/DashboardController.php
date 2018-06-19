@@ -1,9 +1,9 @@
 <?php
 
-namespace Sendler\Http\Controllers\API;
+namespace API\Http\Controllers\API;
 
 use Illuminate\Http\Request;
-use Sendler\Http\Controllers\Controller;
+use API\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {

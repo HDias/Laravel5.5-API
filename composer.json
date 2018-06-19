@@ -6,7 +6,6 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
-        "artesaos/defender": "0.7",
         "askedio/laravel-soft-cascade": "5.5.15",
         "doctrine/dbal": "2.5.13",
         "fideloper/proxy": "~3.3",
@@ -32,14 +31,12 @@
             "database/factories"
         ],
         "psr-4": {
-            "Sendler\\": "app/",
-            "ACL\\": "modules/ACL/app",
+            "API\\": "app/",
             "Select\\": "modules/Select/app",
             "Audit\\": "modules/Audit/app"
         },
         "files": [
             "app/helpers.php",
-            "modules/ACL/helpers.php",
             "modules/Select/helpers.php",
             "modules/Audit/helpers.php"
         ]

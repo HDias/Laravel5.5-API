@@ -13,10 +13,12 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(Sendler\User::class, function (Faker $faker) {
+$factory->define(API\User::class, function (Faker $faker) {
     return [
-        'username' => '01428452133',
+        'name' => $faker->name,
+        'email' => 'admin@admin.com',
         'password' => '123456',
+        'type' => 'admin',
         'remember_token' => str_random(10),
     ];
 });

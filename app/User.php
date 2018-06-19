@@ -1,11 +1,10 @@
 <?php
 
-namespace Sendler;
+namespace API;
 
-use Artesaos\Defender\Traits\HasDefender;
 use Askedio\SoftCascade\Traits\SoftCascadeTrait;
-use Sendler\Scope\SoftDeleting;
-use Sendler\Notifications\ResetPasswordNotification;
+use API\Scope\SoftDeleting;
+use API\Notifications\ResetPasswordNotification;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -17,7 +16,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements AuditableContract, UserResolver, JWTSubject
 {
-    use Notifiable, Auditable, SoftDeletes, HasDefender, SoftCascadeTrait;
+    use Notifiable, Auditable, SoftDeletes, SoftCascadeTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -93,7 +92,7 @@ class User extends Authenticatable implements AuditableContract, UserResolver, J
 
     public function userLogged($username)
     {
-        return $this->select('id', 'username')
-            ->where('username', $username);
+        return $this->select('id', 'email')
+            ->where('email', $username);
     }
 }

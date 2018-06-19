@@ -1,6 +1,6 @@
 <?php
 
-namespace Sendler\Notifications;
+namespace API\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;

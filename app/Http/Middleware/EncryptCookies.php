@@ -1,6 +1,6 @@
 <?php
 
-namespace Sendler\Http\Middleware;
+namespace API\Http\Middleware;
 
 use Illuminate\Cookie\Middleware\EncryptCookies as Middleware;
 

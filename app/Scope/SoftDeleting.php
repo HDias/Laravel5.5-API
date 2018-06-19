@@ -1,6 +1,6 @@
 <?php
 
-namespace Sendler\Scope;
+namespace API\Scope;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -29,9 +29,11 @@ class SoftDeleting extends SoftDeletingScope
         }
     }
 
-    // Se Usuário for Desenvolvedor ou Suporte não adicionar deleted_at IS NULL
+    // Se Usuário for type = admin não adicionar deleted_at IS NULL
     private function verifyUser()
     {
-        return !\Defender::hasRoles([config('defender.restore_role'), config('defender.superuser_role')]);
+        $isAdmin = auth()->check() ? auth()->user()->type == 'admin' ?: false : true;
+
+        return $isAdmin;
     }
 }

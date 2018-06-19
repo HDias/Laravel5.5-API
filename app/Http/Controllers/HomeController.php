@@ -1,6 +1,6 @@
 <?php
 
-namespace Sendler\Http\Controllers;
+namespace API\Http\Controllers;
 
 use Illuminate\Http\Request;
 

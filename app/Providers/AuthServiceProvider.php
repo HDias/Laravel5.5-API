@@ -1,6 +1,6 @@
 <?php
 
-namespace Sendler\Providers;
+namespace API\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -13,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'Sendler\Model' => 'Sendler\Policies\ModelPolicy',
+        'API\Model' => 'API\Policies\ModelPolicy',
     ];
 
     /**

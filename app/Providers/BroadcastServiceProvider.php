@@ -1,6 +1,6 @@
 <?php
 
-namespace Sendler\Providers;
+namespace API\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Broadcast;
