@@ -12,9 +12,8 @@ use Illuminate\Support\Facades\Auth;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use OwenIt\Auditing\Contracts\UserResolver;
-use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements AuditableContract, UserResolver, JWTSubject
+class User extends Authenticatable implements AuditableContract, UserResolver
 {
     use Notifiable, Auditable, SoftDeletes, SoftCascadeTrait;
 
@@ -90,9 +89,9 @@ class User extends Authenticatable implements AuditableContract, UserResolver, J
         return [];
     }
 
-    public function userLogged($username)
+    public function userLogged($email)
     {
         return $this->select('id', 'name', 'email')
-            ->where('email', $username);
+            ->where('email', $email);
     }
 }

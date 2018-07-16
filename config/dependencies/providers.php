@@ -53,7 +53,7 @@ $production = [
     /**
      * http://jwt-auth.readthedocs.io/en/develop/laravel-installation/
      */
-    Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+    \Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
 
     // \Audit\AuditServiceProvider::class,
     // ACL\ACLServiceProvider::class,

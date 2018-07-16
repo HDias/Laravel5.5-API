@@ -176,3 +176,21 @@ if (!function_exists('valueCheck')) {
         return '';
     }
 }
+
+if (!function_exists('verify_fields_request')) {
+    /**
+     * VErifica se um array de keys exist em um array
+     *
+     * @param array $keys
+     * @param array $arr
+     * @return bool
+     * @throws \API\Exceptions\APIException
+     */
+    function verify_fields_request(array $keys, array $arr)
+    {
+        if (!array_diff_key(array_flip($keys), $arr)) {
+            return true;
+        }
+        throw new \API\Exceptions\APIException('Parâmetros Incorretos! Verifique se enviou todos os dados.', 400);
+    }
+}

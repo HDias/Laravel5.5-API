@@ -32,8 +32,9 @@ class Handler extends ExceptionHandler
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param  \Exception  $exception
+     * @param  \Exception $exception
      * @return void
+     * @throws Exception
      */
     public function report(Exception $exception)
     {
@@ -45,48 +46,56 @@ class Handler extends ExceptionHandler
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Exception  $exception
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function render($request, Exception $exception)
     {
-        dd($exception);
+        // dd($exception);
         if (! config('app.debug')) {
             // Verifica a Exception do Form Request para retornar JSOn
             if ($exception instanceof \Illuminate\Validation\ValidationException) {
-
                 return new JsonResponse([
                     'errors' => $exception->errors()
                 ], 422);
             }
 
-            $this->jwtException($exception);
+            if ($exception instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException) {
+                return response()->json([
+                    'mensagem' => trans('jwt.token_invalid.') . ' ' . $exception->getMessage()
+                ], 401);
+            }
 
-            // Exception do Sistema Sendler
-            if ($exception instanceof \API\Exceptions\APIException) {
+            if ($exception instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException) {
+                return response()->json([
+                    'mensagem' => trans('jwt.token_expired') . ' ' .$exception->getMessage()
+                ], 401);
+            }
+
+            if ($exception instanceof \Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException) {
+                return response()->json([
+                    'mensagem' => trans('jwt.not_authorized') . ' ' . $exception->getMessage()
+                ], 401);
+            }
+
+            // Exception do Sistema API
+            if ($exception instanceof \API\Exceptions\APiException) {
                 return new JsonResponse([
                     'mensagem' => $exception->getMessage()
                 ], $exception->getStatusCode());
             }
+
+            // Exception do Sistema API
+            if ($exception instanceof NotFoundHttpException) {
+                return new JsonResponse([
+                    'mensagem' => 'Página Não Encontrada!'
+                ], 404);
+            }
+
             return new JsonResponse([
-                'mensagem' => 'Erro no Sistema! Procure o Administrador.'
+                'mensagem' => 'Erro no Sistema! Procure o Administrador.' . " {$exception->getMessage()}"
             ], 500);
         }
 
         return parent::render($request, $exception);
-    }
-
-    /**
-     * [jwtException description]
-     * @return [type] [description]
-     */
-    private function jwtException($exception)
-    {
-        if ($exception instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException) {
-            return response()->json(['error' => trans('jwt.token_invalid')]);
-        }
-
-        if ($exception instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException) {
-            return response()->json(['error' => trans('jwt.token_expired')]);
-        }
     }
 }

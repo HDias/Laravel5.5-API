@@ -1,3 +1,5 @@
 composer update
 php artisan config:clear
-php artisam config:cache
+php artisan config:cache
+php artisan route:clear
+php artisan route:cache

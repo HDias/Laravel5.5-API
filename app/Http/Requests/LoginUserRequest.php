@@ -6,14 +6,14 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class LoginUserRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
-        return true;
+        $fields = ['email', 'password'];
+
+        /**
+         * Se não passar todos os valores exigidos no post lança Exceção
+         */
+        return verify_fields_request($fields, app('request')->all());
     }
 
     /**
