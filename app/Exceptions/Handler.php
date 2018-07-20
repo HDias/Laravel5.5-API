@@ -5,6 +5,7 @@ namespace API\Exceptions;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -84,11 +85,16 @@ class Handler extends ExceptionHandler
                 ], $exception->getStatusCode());
             }
 
-            // Exception do Sistema API
             if ($exception instanceof NotFoundHttpException) {
                 return new JsonResponse([
                     'mensagem' => 'Página Não Encontrada!'
                 ], 404);
+            }
+
+            if ($exception instanceof MethodNotAllowedHttpException) {
+                return new JsonResponse([
+                    'mensagem' => 'Esse método não é aceito nesta rota!'
+                ], 405);
             }
 
             return new JsonResponse([
